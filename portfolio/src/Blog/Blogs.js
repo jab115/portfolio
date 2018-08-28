@@ -9,6 +9,7 @@ class Blogs extends Component {
     render(){
         const posts = this.props.blogs.map(blog => {
             return (<Col sm= "3"><Blog
+            key = {blog.title}
             title = {blog.title}
             author =  {blog.author}
             body = {blog.body}
