@@ -14,11 +14,19 @@ class App extends Component {
     this.state = {
       blogs:[],
       showBlogs: false,
-      buttonMessage: "show"
+      buttonMessage: "show",
+      postSelected: false,
+      selectedPostId: null
     }
   }
 
-  loadBlogs = (event) => {
+  singleBlogHandler = (event) => {
+    this.setState({showBlogs: false});
+    this.loadBlogs(event);
+
+}
+
+  componentDidMount(){
     const show = !this.state.showBlogs
     this.setState({showBlogs: show});
     let message = null;
@@ -26,7 +34,7 @@ class App extends Component {
        message = "hide"
       axios.get(`https://jsonplaceholder.typicode.com/posts`)
       .then(res => {
-        const resultBlogs = res.data;
+        const resultBlogs = res.data.slice(0, 5);
         this.setState({ blogs: resultBlogs,
                         buttonMessage: message
                        });
@@ -48,10 +56,13 @@ class App extends Component {
       <div className="App">
         <Navbar showBlogs = {() => this.loadBlogs()} 
                 btnMessage = {this.state.buttonMessage}
+                showSelected = {this.state.postSelected}
+                id = {this.state.selectedPostId}
         />
         <Container>  
         <Row>
-        <Blogs blogs = {this.state.blogs}/>
+        <Blogs blogs = {this.state.blogs}
+               singleBlogSelected = {() => this.singleBlogHandler()}/>
         </Row>
         </Container>
        

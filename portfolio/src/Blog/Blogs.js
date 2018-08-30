@@ -6,13 +6,22 @@ import { Row, Col, Container } from 'reactstrap';
 
 class Blogs extends Component {
 
+    state = {
+        loadedPost: null
+    }
+
+    postSelectedHandler = (id) => {
+        this.setState({loadedPost: id})
+    }
+
     render(){
         const posts = this.props.blogs.map(blog => {
-            return (<Col sm= "3"><Blog
-            key = {blog.title}
+            return (<Col sm= "3" key = {blog.id}><Blog
+            id = {blog.id}
             title = {blog.title}
-            author =  {blog.author}
             body = {blog.body}
+            clicked = {() => this.postSelectedHandler(blog.id)}
+            blogSelection = {this.props.singleBlogSelected}
              /></Col>)
         }
     )
