@@ -1,13 +1,14 @@
 import React,{Component} from 'react';
-import { Button, Form, FormGroup, Label, Input, FormText, Row, Col } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Row, Col, Container } from 'reactstrap';
 
 export class NewPost extends Component {
     render(){
         return(
+            <Container>
             <Row>
             <Col sm = '3'></Col>
             <Col sm = '6'>
-            <Form>
+            <Form className = "form">
             <FormGroup>
               <Label for="exampleEmail">Title</Label>
               <Input type="text" name="email" id="exampleEmail" placeholder="Title" />
@@ -25,6 +26,7 @@ export class NewPost extends Component {
           </Col>
           <Col sm = '3'></Col>
           </Row>
+          </Container>
         )
     }
 }
