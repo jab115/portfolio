@@ -1,8 +1,7 @@
 import React from 'react'
 import { Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button } from 'reactstrap';
-import {NavLink, Route} from 'react-router-dom'
-import ExpandedPost from '../Components/ExpandedPost/ExpandedPost'
+
 
 const blog = (props) => {
     return (
@@ -13,10 +12,9 @@ const blog = (props) => {
             <CardTitle>{props.title}</CardTitle>
             <CardSubtitle>Jon Blow</CardSubtitle>
             <CardText>{props.body.substring(0,50)}</CardText>
-            <Button  color = "link" tag={NavLink} to = {'/' + props.id} onClick={function(event){ props.clicked; props.blogSelection}}>expand</Button>
+            <Button  color = "danger" onClick={props.clicked}>expand</Button>
           </CardBody>
         </Card>
-        <Route path = "/:id" exact component = {ExpandedPost} />
         </div>
     
     )

@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import Blogs from '../src/Blog/Blogs'
-import axios from 'axios'
 import { Row, Container } from 'reactstrap';
 import Navbar from '../src/Components/Navbar/Navbar'
-import { BrowserRouter, Route, NavLink, Switch } from 'react-router-dom'
-
-
+import { BrowserRouter } from 'react-router-dom'
 
 class App extends Component {
   constructor(props){
@@ -18,35 +14,6 @@ class App extends Component {
       postSelected: false,
       selectedPostId: null
     }
-  }
-
-  singleBlogHandler = (event) => {
-    this.setState({showBlogs: false});
-    this.loadBlogs(event);
-
-}
-
-  componentDidMount(){
-    const show = !this.state.showBlogs
-    this.setState({showBlogs: show});
-    let message = null;
-    if (show){
-       message = "hide"
-      axios.get(`https://jsonplaceholder.typicode.com/posts`)
-      .then(res => {
-        const resultBlogs = res.data.slice(0, 5);
-        this.setState({ blogs: resultBlogs,
-                        buttonMessage: message
-                       });
-      });
-    } else {
-      message = "show"
-      this.setState({blogs: [],
-                    buttonMessage: message 
-                    });
-    }
-    
-
   }
 
   render() {
@@ -61,8 +28,7 @@ class App extends Component {
         />
         <Container>  
         <Row>
-        <Blogs blogs = {this.state.blogs}
-               singleBlogSelected = {() => this.singleBlogHandler()}/>
+        {/* <Blogs /> */}
         </Row>
         </Container>
        

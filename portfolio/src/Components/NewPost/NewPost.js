@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import { Button, Form, FormGroup, Label, Input, FormText, Row, Col, Container } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Row, Col, Container } from 'reactstrap';
 
 export class NewPost extends Component {
     render(){

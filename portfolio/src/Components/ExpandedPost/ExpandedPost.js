@@ -5,24 +5,6 @@ import './ExpandedPost.css';
 
 class expandedPost extends Component {
 
-    state = {
-        loadedPost: null
-    }
-
-    
-    componentDidMount(){
-        console.log(this.props)
-        if (this.props.match.params.id){
-            if (!this.state.loadedPost ||( this.state.loadedPost && this.state.loadedPost.id !== this.props.id)){
-                axios.get('https://jsonplaceholder.typicode.com/posts/' + this.props.match.params.id)
-                .then(response => {
-                    this.setState({loadedPost: response.data})
-                })
-            }
-           
-        }
-        
-    }
 
     deletePostHandler =() => {
             axios.delete('/posts/'+ this.props.id)
@@ -32,22 +14,18 @@ class expandedPost extends Component {
     }
 
     render () {
-        let post = <p style ={{textAlign: 'center'}}>Please select a Post!</p>;
-        if (this.props.id){
-            post = <p style ={{textAlign: 'center'}}>Loading</p>;
-        }
-        if (this.state.loadedPost){
-        post = (
+       
+       const post = (
             <div className="ExpandedPost">
-                <h1>{this.state.loadedPost.title}</h1>
-                <p>{this.state.loadedPost.body}</p>
+                <h1>Jon Blow</h1>
+                <p>{this.props.body}</p>
                 <div className="Edit">
                     <button className="Delete" onClick = {this.deletePostHandler}>Delete</button>
                 </div>
             </div>
 
         );
-    }
+    
         return post;
     }
 }
