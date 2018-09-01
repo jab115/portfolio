@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import Blog from './Blog';
-import { Row, Col, Container } from 'reactstrap';
+import { Row, Col, Container, Button } from 'reactstrap';
 import ExpanedPost from '../Components/ExpandedPost/ExpandedPost'
 import axios from 'axios'
 
@@ -11,7 +11,10 @@ class Blogs extends Component {
     state = {
         blogs:[],
         selectedPost: null,
-        showBlogs: false
+        showBlogs: false,
+        retrievedBlogs: [],
+        currentBlogHead: 0,
+        numberOfBlogs: 4
     }
 
     componentDidMount(){
@@ -20,8 +23,9 @@ class Blogs extends Component {
         if (show){
           axios.get(`https://jsonplaceholder.typicode.com/posts`)
           .then(res => {
-            const resultBlogs = res.data.slice(0, 5);
-            this.setState({ blogs: resultBlogs});
+            this.setState({retrievedBlogs: res.data})
+            this.setState({ blogs: 
+                this.state.retrievedBlogs.slice(this.state.currentBlogHead, this.state.currentBlogHead + this.state.numberOfBlogs)});
           });
         } else {
           this.setState({blogs: []});
@@ -33,6 +37,11 @@ class Blogs extends Component {
                  .then(response => {
                      this.setState({blogs: [response.data], selectedPost: true})
                  })
+    }
+    loadBlogsHandler = (event) => {
+        this.setState({currentBlogHead: this.state.currentBlogHead + this.state.numberOfBlogs})
+        this.setState({ blogs: 
+            this.state.retrievedBlogs.slice(this.state.currentBlogHead, this.state.currentBlogHead + this.state.numberOfBlogs)});
     }
 
     render(){
@@ -59,6 +68,11 @@ class Blogs extends Component {
             <Row>
                 { posts }
             </Row>
+            <Row> n </Row>
+            <Row>
+            <Button  outline block color = "primary" onClick = {() => this.loadBlogsHandler()}>load more </Button>
+            </Row>
+            
         </Container>
         </div>
         )
