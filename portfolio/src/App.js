@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Row, Container } from 'reactstrap';
+import {Container} from 'reactstrap'
 import Navbar from '../src/Components/Navbar/Navbar'
 import { BrowserRouter } from 'react-router-dom'
 
@@ -19,21 +19,16 @@ class App extends Component {
   render() {
     
     return (
-      <BrowserRouter>
-      <div className="App">
-        <Navbar showBlogs = {() => this.loadBlogs()} 
-                btnMessage = {this.state.buttonMessage}
-                showSelected = {this.state.postSelected}
-                id = {this.state.selectedPostId}
-        />
-        <Container>  
-        <Row>
-        {/* <Blogs /> */}
-        </Row>
-        </Container>
-       
+      
+      <div >
+      <Container className = "App">
+        <BrowserRouter>
+          <div>
+            <Navbar />
+          </div>
+        </BrowserRouter>
+      </Container>
       </div>
-      </BrowserRouter>
     );
   }
 }

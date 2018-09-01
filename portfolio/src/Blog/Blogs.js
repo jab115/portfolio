@@ -52,7 +52,8 @@ class Blogs extends Component {
             body = {blog.body} />
     } else {
          posts = this.state.blogs.map(blog => {
-            return (<Col sm= "3" key = {blog.id}><Blog
+            return (<Col sm= "3" key = {blog.id}>
+            <Blog
             id = {blog.id}
             title = {blog.title}
             body = {blog.body}
@@ -70,7 +71,7 @@ class Blogs extends Component {
             </Row>
             <Row> n </Row>
             <Row>
-            <Button  outline block color = "primary" onClick = {() => this.loadBlogsHandler()}>load more </Button>
+            <Button  outline block onClick = {() => this.loadBlogsHandler()}>load more </Button>
             </Row>
             
         </Container>
