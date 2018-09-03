@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Row, Col} from 'reactstrap'
+import {Row, Col, Container} from 'reactstrap'
 import axios from 'axios';
 
 import './ExpandedPost.css';
@@ -18,17 +18,14 @@ class expandedPost extends Component {
        
        const post = (
             <div className="ExpandedPost">
+                <Container>
+                <img src="https://picsum.photos/318/180/?random" alt = ""/>
+                <div>   
+                    <h1>{this.props.title}</h1>
+                </div>
                 <Row>
-                    <Col md = "6">
-                        <Col md = "8">
-                            <h1>{this.props.title}</h1>
-                        </Col>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col sm = "1"></Col>
                     <Col sm = "2">
-                        <h6>Jonathan Blow</h6>
+                        <h6><emp>jonathan blow</emp></h6>
                     </Col>
                 </Row>
                 <Row>
@@ -40,6 +37,7 @@ class expandedPost extends Component {
                 <div className="Edit">
                     <button className="Delete" onClick = {this.deletePostHandler}>Delete</button>
                 </div>
+                </Container>
             </div>
 
         );
