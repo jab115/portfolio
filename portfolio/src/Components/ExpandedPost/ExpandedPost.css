@@ -1,13 +1,29 @@
 .ExpandedPost {
-    width: 80%;
+    width: 100%;
     margin: 20px auto;
-    border: 1px solid #eee;
-    box-shadow: 0 2px 3px #ccc;
     text-align: center;
 }
 
-.Edit {
+.ExpandedPost img{
+    width: 75%;
+    height: 50%;
+}
 
+.ExpandedPost h6{
+    color: white;
+    text-shadow: 1px 1px gray;
+}
+
+.ExpandedPost h1{
+    color: white;
+    text-shadow: 1px 1px gray;
+    text-align: center !important;
+}
+
+.ExpandedPost p{
+    color: white;
+    text-shadow: 1px 1px gray;
+    
 }
 
 .Edit label {
