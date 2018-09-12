@@ -3,6 +3,7 @@ import Blog from './Blog';
 import { Row, Col, Container, Button } from 'reactstrap';
 import ExpanedPost from '../Components/ExpandedPost/ExpandedPost'
 import axios from 'axios'
+import './Blogs.css'
 
 //component contains the list of blog cards, dynamically rendered.
 
@@ -21,9 +22,16 @@ class Blogs extends Component {
         const show = !this.state.showBlogs
         this.setState({showBlogs: show});
         if (show){
-          axios.get(`https://jsonplaceholder.typicode.com/posts`)
+          axios.get(`https://blog-cd980.firebaseio.com/blogs.json`)
           .then(res => {
-            this.setState({retrievedBlogs: res.data})
+              const fetchedBlogs = [];
+              for (let key in res.data){
+                    fetchedBlogs.push({
+                        ...res.data[key],
+                        id: key
+                    })
+              }
+            this.setState({retrievedBlogs: fetchedBlogs})
             this.setState({ blogs: 
                 this.state.retrievedBlogs.slice(this.state.currentBlogHead, this.state.currentBlogHead + this.state.numberOfBlogs)});
           });
@@ -63,6 +71,7 @@ class Blogs extends Component {
             id = {blog.id}
             title = {blog.title}
             body = {blog.body}
+            src = {blog.src}
             clicked = {() => this.postSelectedHandler(blog.id)}
              /></Col>)  
             })
@@ -71,7 +80,7 @@ class Blogs extends Component {
         
         
      return ( 
-        <div>
+        <div className= "Blogs">
         <Container>
             <Row>
                 { posts }

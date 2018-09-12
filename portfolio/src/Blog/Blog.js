@@ -8,7 +8,7 @@ const blog = (props) => {
         <div>
         <CardDeck>
         <Card>
-          <CardImg top width="100%" src="https://picsum.photos/318/180/?random" alt="Card image cap" />
+          <CardImg top width="100%" src={props.src} alt="Card image cap" />
           <CardBody>
             <CardTitle>{props.title}</CardTitle>
             <CardSubtitle>Jon Blow</CardSubtitle>
