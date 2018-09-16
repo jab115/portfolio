@@ -41,24 +41,28 @@ class Blogs extends Component {
     }
 
     postSelectedHandler = (id) => {
-         axios.get('https://jsonplaceholder.typicode.com/posts/' + id)
-                 .then(response => {
-                     this.setState({blogs: [response.data], selectedPost: true})
-                 })
+        for (let index in this.state.retrievedBlogs){
+            let blog = this.state.retrievedBlogs[index]
+            if (blog.id === id){
+                this.setState({blogs: [blog], selectedPost: true})
+            }
+        }  
     }
-    loadBlogsHandler = (event) => {
-        let current = this.state.currentBlogHead;
+
+    loadBlogsHandler = (direction) => {
         let increment = this.state.numberOfBlogs;
+        let current = this.state.currentBlogHead;
+        if (direction === "backward"){
+            increment = -1 * increment;
+        }
         this.setState({
             currentBlogHead: current + increment
         }, () =>{
-            this.setState({blogs: this.state.retrievedBlogs.slice( this.state.currentBlogHead, this.state.currentBlogHead + this.state.numberOfBlogs)});
+                this.setState({blogs: this.state.retrievedBlogs.slice( this.state.currentBlogHead, this.state.currentBlogHead + this.state.numberOfBlogs)});
+                });        
         }
-    );        
-    }
 
-
-    render(){
+render(){
         var posts;
     if (this.state.blogs.length === 1 && this.state.selectedPost === true){
             var blog = this.state.blogs[0];
@@ -74,10 +78,14 @@ class Blogs extends Component {
             src = {blog.src}
             clicked = {() => this.postSelectedHandler(blog.id)}
              /></Col>)  
-            })
-        
+            });
         }
-        
+
+        var buttons = {
+            margin: "auto",
+            width: "50%",
+            padding: "10px"
+          };
         
      return ( 
         <div className= "Blogs">
@@ -85,11 +93,14 @@ class Blogs extends Component {
             <Row>
                 { posts }
             </Row>
-            <Row> n </Row>
+            <Row style = {{padding: "10px"}}/>  
             <Row>
             {this.state.blogs.length === 1 && this.state.selectedPost === true ? 
             null : 
-            <Button  outline block onClick = {() => this.loadBlogsHandler()}>load more </Button>}
+            <div style = {buttons}>
+            <Button  outline onClick = {() => this.loadBlogsHandler("backward")}>  {"<"} </Button>
+            <Button  outline onClick = {() => this.loadBlogsHandler("forward")}> {">"} </Button>
+            </div>}
             </Row>
             
         </Container>
