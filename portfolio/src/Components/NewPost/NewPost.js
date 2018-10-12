@@ -16,21 +16,31 @@ export class NewPost extends Component {
    
     // componentDidMount(){
     //   const blog = this.state.blog
-    //   axios.post(`https://blog-cd980.firebaseio.com/blogs.json`, blog)
-    //         .then(response => console.log(response))
-    //         .catch(error => console.log(error))
+    //   
     // }
-    submit = (event) =>{
-      let newblog = {
-        title: event.target.value.title,
-        author: event.target.value.author,
-        body : event.target.value.body
-      }
-      this.setState({
-          blog: newblog
-      });
-      console.log(this.state.blog.title)
+     submit = () =>{
+       let newblog = {
+         title: this.state.title,
+         author: this.state.author,
+         body : this.state.body
+       }
+       axios.post(`https://blog-cd980.firebaseio.com/blogs.json`, newblog)
+           .then(response => console.log(response))
+           .catch(error => console.log(error))
+       
+       
+     }
+
+    getTitle(e) {
+      this.setState({ title : e.target.value });
     }
+    getAuthor(e) {
+      this.setState({ author : e.target.value });
+    }
+    getBody(e) {
+      this.setState({ body : e.target.value });
+    }
+    
 
     render(){
         return(
@@ -41,17 +51,17 @@ export class NewPost extends Component {
             <Form className = "form">
             <FormGroup>
               <Label for="exampleEmail">title</Label>
-              <Input type="text"  value={title}  placeholder="Title" />
+              <Input type="text"  value={this.state.title}  placeholder="Title" onChange = {this.getTitle.bind(this)} />
             </FormGroup>
-            <FormGroup>
+             <FormGroup>
               <Label for="examplePassword">author</Label>
-              <Input type="text" value={author}  placeholder="Author" />
+              <Input type="text" value={this.state.author}  placeholder="Author" onChange = {this.getAuthor.bind(this)} />
             </FormGroup>
               <FormGroup>
               <Label for="exampleText">body</Label>
-              <Input type="textarea" value={body}  />
-            </FormGroup>
-            <Button onClick = {this.submit()}>Submit</Button>
+              <Input type="textarea" value={this.state.body} onChange = {this.getBody.bind(this)} />
+            </FormGroup> 
+            <Button onClick = {this.submit()}>Submit</Button> 
           </Form>
           </Col>
           <Col sm = '3'></Col>

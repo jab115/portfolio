@@ -8,7 +8,6 @@ import './Blogs.css'
 //component contains the list of blog cards, dynamically rendered.
 
 class Blogs extends Component {
-
     state = {
         blogs:[],
         selectedPost: null,
